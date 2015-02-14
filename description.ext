@@ -1,0 +1,37 @@
+#include "VAS\menu.hpp"
+
+class CfgFunctions
+{
+	#include "VAS\cfgfunctions.hpp"
+	
+	class customFncs
+    {
+        class PreInifFncs
+        {        
+            class skipBriefingPreInitFnc 
+            {
+                preInit = 1;
+                file = "skipBriefing.sqf";
+            };
+        };
+    };
+};
+
+enableDebugConsole = 1;			// Debug console for Host & logged in admins
+respawn = 3;
+respawnDelay = 10;
+briefing = 0;
+
+author = "Maximilian Siekmann"; // Author
+onLoadName = "Equipment Range"; // Mission name on Loading Screen
+onLoadMission = " For - The Crazy Legendarys. "; // Description on Loading Screen
+loadScreen = "erThumbnail.paa"; // Preview picture
+
+overviewPicture = "erThumbnail.paa"; // Preview picture in mission selection
+
+class Header
+{
+	gameType = Sandbox;
+	minPlayers = 1;
+	maxPlayers = 12;
+};
