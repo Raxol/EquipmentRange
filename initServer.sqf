@@ -1,3 +1,5 @@
+spawnTimeout = 0;
+
 "spawnPacket" addPublicVariableEventHandler 
 {
 	if (!isNil "spawnedVeh") then
@@ -6,7 +8,7 @@
 			if (side _x == east) then {deleteVehicle _x};
 		} forEach allUnits;
 		
-		deleteVehicle (spawnedVeh select 0);
+		deleteVehicle spawnedVeh;
 	};
 	
 	_typeVal = (_this select 1) select 0;
@@ -33,9 +35,14 @@
 	
 	vehGroup = createGroup (createCenter east);
 	
-	spawnedVeh = [getMarkerPos "vehSpawn", 0, vehType, vehGroup] call BIS_fnc_spawnVehicle;
+	//spawnedVeh = [getMarkerPos "vehSpawn", 0, vehType, vehGroup] call BIS_fnc_spawnVehicle;
+	spawnedVeh = createVehicle [vehType, getMarkerPos "vehSpawn", [], 0, "NONE"];
+	createVehicleCrew spawnedVeh;
 
-	(spawnedVeh select 0) setVehicleAmmo 0;
+	(crew spawnedVeh) joinSilent vehGroup;
+
+	//(spawnedVeh select 0) setVehicleAmmo 0;
+	spawnedVeh setVehicleAmmo 0;
 
 	_wp = vehGroup addWaypoint [getMarkerPos "vehWaypoint", 0];
 	[vehGroup, 1] setWaypointBehaviour "CARELESS";
